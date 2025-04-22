@@ -18,3 +18,4 @@ denoise+gui.cpp ---- PW2 - Ex1.3, denoise on the picture with qt gui
 
 
 
+final_anaglyph_denoise+gaussian.cpp ---- PW2 - EX1 all, no openMP, no CUDA.
