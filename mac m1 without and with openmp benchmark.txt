@@ -1,0 +1,50 @@
+In mac M1 env,
+
+Gaussian: K=11, S=7
+Denoise: N=3, R=20
+
+No openMP: 
+Gaussian: 0.646096s
+Denoise: 38.2775s
+
+With openMP
+Gaussian: 
+#pragma omp parallel for
+    for (int y = 0; y < input.rows; ++y) {
+        for (int x = 0; x < input.cols; ++x) {
+            for (int c = 0; c < input.channels(); ++c) {
+                double sum = 0.0;
+                for (int ky = 0; ky < kernel.rows; ++ky) {
+                    for (int kx = 0; kx < kernel.cols; ++kx) {                
+0.149491s
+
+for (int y = 0; y < input.rows; ++y) {
+        #pragma omp parallel for
+        for (int x = 0; x < input.cols; ++x) {
+            for (int c = 0; c < input.channels(); ++c) {
+                double sum = 0.0;
+                for (int ky = 0; ky < kernel.rows; ++ky) {
+                    for (int kx = 0; kx < kernel.cols; ++kx) {
+0.270523
+
+for (int y = 0; y < input.rows; ++y) {
+        for (int x = 0; x < input.cols; ++x) {
+            #pragma omp parallel for
+            for (int c = 0; c < input.channels(); ++c) {
+                double sum = 0.0;
+                for (int ky = 0; ky < kernel.rows; ++ky) {
+                    for (int kx = 0; kx < kernel.cols; ++kx) {
+51.1776s
+
+Denoise:
+#pragma omp parallel for
+    for (int y = 0; y < input.rows; ++y) {
+        for (int x = 0; x < input.cols; ++x) {
+7.52307s
+
+for (int y = 0; y < input.rows; ++y) {
+    #pragma omp parallel for
+    for (int x = 0; x < input.cols; ++x) {
+10.6909s
+
+
