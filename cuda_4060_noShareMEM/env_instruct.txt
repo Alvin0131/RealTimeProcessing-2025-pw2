@@ -1,0 +1,1 @@
+NO shared memory, only cuda, i9-14900hx, 4060 (Laptop)
