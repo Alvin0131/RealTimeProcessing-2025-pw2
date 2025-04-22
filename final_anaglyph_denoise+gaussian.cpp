@@ -77,7 +77,7 @@ Mat manualGaussianBlur(const Mat& input, const Mat& kernel) {
     copyMakeBorder(input, padded, pad, pad, pad, pad, BORDER_REPLICATE);
     Mat output = input.clone();
 
-#pragma omp parallel for collapse(2)
+
     for (int y = 0; y < input.rows; ++y) {
         for (int x = 0; x < input.cols; ++x) {
             for (int c = 0; c < input.channels(); ++c) {
