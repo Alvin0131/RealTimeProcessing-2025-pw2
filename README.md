@@ -10,3 +10,11 @@ anaglyph.pro ---- PW2 - qt pro file, change the sources name accordingly, in Mac
 
 
 anaglyph+gaussian.cpp ---- PW2 - Ex1.2, anaglyph and gaussian with qt gui
+
+
+
+
+denoise+gui.cpp ---- PW2 - Ex1.3, denoise on the picture with qt gui
+
+
+
