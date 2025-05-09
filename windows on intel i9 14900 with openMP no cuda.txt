@@ -1,0 +1,63 @@
+denoise:
+
+  #pragma omp parallel for
+    for (int y = 0; y < input.rows; ++y) {
+        for (int x = 0; x < input.cols; ++x) {
+            Rect roi(x, y, neighborhoodSize, neighborhoodSize);
+            roi &= Rect(0, 0, padded.cols, padded.rows);
+            Mat patch = padded(roi);
+85.7442s
+
+for (int y = 0; y < input.rows; ++y) {
+#pragma omp parallel for
+        for (int x = 0; x < input.cols; ++x) {
+            Rect roi(x, y, neighborhoodSize, neighborhoodSize);
+            roi &= Rect(0, 0, padded.cols, padded.rows);
+            Mat patch = padded(roi);
+87.7101
+
+#pragma omp parallel for collapse(2)
+    for (int y = 0; y < input.rows; ++y) {
+        for (int x = 0; x < input.cols; ++x) {
+            Rect roi(x, y, neighborhoodSize, neighborhoodSize);
+            roi &= Rect(0, 0, padded.cols, padded.rows);
+            Mat patch = padded(roi);
+85.9049s
+
+
+
+gaussian:
+
+#pragma omp parallel for
+    for (int y = 0; y < input.rows; ++y) {
+        for (int x = 0; x < input.cols; ++x) {
+            for (int c = 0; c < input.channels(); ++c) {
+                double sum = 0.0;
+                for (int ky = 0; ky < kernel.rows; ++ky) {
+                    for (int kx = 0; kx < kernel.cols; ++kx) {
+0.390134s
+
+
+    for (int y = 0; y < input.rows; ++y) {
+#pragma omp parallel for
+        for (int x = 0; x < input.cols; ++x) {
+            for (int c = 0; c < input.channels(); ++c) {
+                double sum = 0.0;
+                for (int ky = 0; ky < kernel.rows; ++ky) {
+                    for (int kx = 0; kx < kernel.cols; ++kx) {
+0.384939s
+
+
+for (int y = 0; y < input.rows; ++y) {
+        for (int x = 0; x < input.cols; ++x) {
+#pragma omp parallel for
+            for (int c = 0; c < input.channels(); ++c) {
+                double sum = 0.0;
+                for (int ky = 0; ky < kernel.rows; ++ky) {
+                    for (int kx = 0; kx < kernel.cols; ++kx) {
+0.384604
+
+
+
+
+
